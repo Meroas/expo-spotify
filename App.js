@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react-native';
 import { func } from './src/constants';
 
 // root stack navigation
@@ -61,4 +62,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthenticator(App);
