@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import { DataStore } from '@aws-amplify/datastore';
+import { useFocusEffect } from '@react-navigation/native';
 import { colors, device, gStyle, images } from '../constants';
 
 // components
@@ -19,14 +21,21 @@ import LineItemSong from '../components/LineItemSong';
 import TouchIcon from '../components/TouchIcon';
 import TouchText from '../components/TouchText';
 
-// mock data
-import albums from '../mockdata/albums';
+import { Album, Track } from '../models';
 
 // context
 import Context from '../context';
 
-const Album = ({ navigation, route }) => {
+const AlbumScreen = ({ navigation, route }) => {
   const { title } = route.params;
+  const [album, setAlbum] = React.useState(null);
+  const [tracks, setTracks] = React.useState(null);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadAlbum();
+    }, [])
+  );
 
   // get main app state
   const { currentSongData, showMusicBar, updateState } =
@@ -38,7 +47,17 @@ const Album = ({ navigation, route }) => {
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   // ui state
-  const album = albums[title] || null;
+  const loadAlbum = async () => {
+    const result = await DataStore.query(Album, (a) => a.title('eq', title));
+    const tempAlbum = result.length === 1 ? result[0] : null;
+    setAlbum(tempAlbum);
+    if (tempAlbum) {
+      const tracksResult = await DataStore.query(Track, (t) =>
+        t.albumID('eq', tempAlbum.id)
+      );
+      setTracks(tracksResult);
+    }
+  };
 
   const onToggleDownloaded = (val) => {
     // if web
@@ -192,8 +211,8 @@ const Album = ({ navigation, route }) => {
             />
           </View>
 
-          {album.tracks &&
-            album.tracks.map((track) => (
+          {tracks &&
+            tracks.map((track) => (
               <LineItemSong
                 active={song === track.title}
                 downloaded={downloaded}
@@ -347,4 +366,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Album;
+export default AlbumScreen;
