@@ -1,0 +1,16 @@
+type Track @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  seconds: Int
+  albumID: ID! @index(name: "byAlbum")
+}
+
+type Album @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  artist: String!
+  backgroundColor: String
+  image: String
+  released: Int
+  title: String!
+  Tracks: [Track] @hasMany(indexName: "byAlbum", fields: ["id"])
+}

@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-spotifyexpo-staging-85833-authRole",
+      "UnauthRoleArn": "arn:aws:iam::637425253898:role/amplify-spotifyexpo-staging-85833-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::637425253898:role/amplify-spotifyexpo-staging-85833-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-spotifyexpo-staging-85833-deployment",
+      "UnauthRoleName": "amplify-spotifyexpo-staging-85833-unauthRole",
+      "StackName": "amplify-spotifyexpo-staging-85833",
+      "StackId": "arn:aws:cloudformation:eu-central-1:637425253898:stack/amplify-spotifyexpo-staging-85833/5d61b310-d4f6-11ec-a5e8-022273548180",
+      "AmplifyAppId": "d3j0opdekasg3u"
+    }
+  }
+}
