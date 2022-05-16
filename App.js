@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
+import { Amplify } from 'aws-amplify';
 import { func } from './src/constants';
 
 // root stack navigation
@@ -8,6 +9,11 @@ import RootStack from './src/navigation/RootStack';
 
 // app context state
 import AppState from './src/context/AppState';
+
+// configure amplify
+import awsconfig from './src/aws-exports';
+
+Amplify.configure(awsconfig);
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
