@@ -10,6 +10,11 @@
       "StackName": "amplify-spotifyexpo-staging-85833",
       "StackId": "arn:aws:cloudformation:eu-central-1:637425253898:stack/amplify-spotifyexpo-staging-85833/5d61b310-d4f6-11ec-a5e8-022273548180",
       "AmplifyAppId": "d3j0opdekasg3u"
+    },
+    "categories": {
+      "auth": {
+        "Spotifyexpo": {}
+      }
     }
   }
 }
